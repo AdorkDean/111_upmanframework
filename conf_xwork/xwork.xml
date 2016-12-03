@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "xwork-1.1.1.dtd">
+<xwork>
+	<!-- Include webwork defaults -->
+	<include file="webwork-default.xml"/>
+	<include file="config-browser.xml"/>
+	<include file="xwork-system.xml"/>
+	<!-- add your webwork config file -->
+</xwork>

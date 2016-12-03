@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+<xwork>
+	<!-- Configuration for the default package. -->
+	<package name="default" extends="webwork-default">
+        <interceptors>
+            <!-- Interceptor to handle http context -->
+            <interceptor name="context" class="com.tywire.app.framework.webapp.interceptor.ContextInterceptor"/>
+            <!-- https://issues.apache.org/struts/browse/WW-1187 -->
+            <interceptor-stack name="defaultStack">
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servlet-config"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="model-driven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="static-params"/>
+                <interceptor-ref name="params"/>
+                <interceptor-ref name="context"/>            
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel</param>
+                </interceptor-ref>
+            </interceptor-stack>
+            
+            <interceptor-stack name="fileUploadStack">
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            
+            <interceptor-stack name="validationStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="validation"/>
+            </interceptor-stack>
+        </interceptors>
+		<default-interceptor-ref name="defaultStack"/>
+        <global-results>
+            <result name="dataAccessFailure" type="freemarker">/WEB-INF/pages/config-brower/dataAccessFailure.ftl</result>
+            <result name="login" type="redirect">
+				<param name="location">/login/login.action</param>
+			</result>
+			<result name="forbidden" type="freemarker">
+				<param name="location">/WEB-INF/pages/config-brower/forbidden_access.ftl</param>
+			</result>
+        </global-results>
+        
+        <global-exception-mappings>
+            <exception-mapping exception="org.springframework.dao.DataAccessException" result="dataAccessFailure"/>
+        </global-exception-mappings>
+        <!-- sytem actions -->
+      </package>
+</xwork>

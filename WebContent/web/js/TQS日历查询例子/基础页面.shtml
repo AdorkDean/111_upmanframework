@@ -1,0 +1,106 @@
+九城集团<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+<title>广告后台管理系统 v1.0</title>
+<META http-equiv="Content-Type" content="text/html; charset=GBK2312">
+<META http-equiv="Content-Language" content="UTF-8">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/calendar.js"></script>
+<script src="js/popcalendar.js"></script>
+<script src="js/util.js"></script>
+<script src="js/validate.js"></script>
+<script src="js/dict.js"></script>
+<script src="js/string.js" ></script>
+<script src="js/lw_layers.js"></script>
+<script src="js/lw_menu.js"></script> 
+<script src="js/JoinCountry.js" ></script>
+<script type="text/javascript">
+
+	
+	
+	
+	
+		//查询1
+	function search11()
+	{
+		
+		//查询日期
+		if(checkDate())
+		{
+			document.form1.flag.value = "1";
+			document.form1.action = "#";
+			//alert(document.form1.action);
+			document.form1.submit();
+		}
+	}
+	
+	//日期判断
+	function dateCompare1(startDate, endDate) 
+	{
+    	var strBegindate = startDate.substring(0,4)+startDate.substring(5,7)+startDate.substring(8,10);
+    	var strEnddate = endDate.substring(0,4)+endDate.substring(5,7)+endDate.substring(8,10);
+    	return parseInt(strBegindate)>parseInt(strEnddate);
+	}
+	
+	//增加
+	function add1()
+	{
+		form1.action = "#";
+		form1.submit();
+	}
+	
+	function checkDate(){
+    var bdate = document.form1.begindate.value;
+    var edate = document.form1.enddate.value;
+    if (bdate!=""){
+        if(bdate.isValidDate()){
+        }else{
+            alert("输入的开始日期格式不正确");
+            document.form1.begindate.focus();
+            return false;
+        }
+    }
+    if (edate!=""){
+        if(edate.isValidDate()){
+        }else{
+            alert("输入的结束日期格式不正确");
+            document.form1.enddate.focus();
+            return false;
+        }
+    }
+    if (bdate!="" && edate!=""){
+        if(dateCompare1(bdate,edate))
+        {
+            alert("结束日期不能大于开始时间");
+            document.form1.enddate.focus();
+            return false;
+        }
+    }
+    return true;
+}
+	
+	
+	
+</script>
+</head>
+<body>
+<form name="form1" id="form1" method="post" action="#">
+
+&nbsp;&nbsp;加入时间：从&nbsp;&nbsp;<input name="begindate" type="text" value="" size="16" />
+<script language='javascript'>
+		if (!document.layers) {
+			document.write("<img onmouseup='popUpCalendar(this,form1.begindate,\"yyyy-mm-dd\")' id=imgSelDate height=19  src='images/calendar.gif' width=19 align=absMiddle border=0 name=imgSelDate>");
+		}
+</script>
+&nbsp;&nbsp;到&nbsp;&nbsp;<input name="enddate" value="" type="text" size="16" />
+<script language='javascript'>
+		if (!document.layers) {
+			document.write("<img onmouseup='popUpCalendar(this,form1.enddate,\"yyyy-mm-dd\")' id=imgSelDate height=19  src='images/calendar.gif' width=19 align=absMiddle border=0 name=imgSelDate>");
+		}
+</script>
+&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="查询客户" onClick="search11();"/>
+</div>
+
+</form>
+</body>
+</html>
